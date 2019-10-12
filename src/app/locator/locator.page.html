@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>locator</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <form>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Home Location</ion-label>
+      <ion-input type="text" name="homeLocation" ngModel #homeLocation="ngModel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Work Location</ion-label>
+        <ion-input type="text" name="workLocation" ngModel #workLocation="ngModel"></ion-input>
+      </ion-item>
+
+</ion-list>
+
+  <ion-button type="submit" color="primary" expand="block" (click)="onGetHomeLocation(homeLocation,workLocation)" >
+      Search
+  </ion-button>
+</form>
+<ion-item>
+  
+  <ion-label position="floating">auto Work Location</ion-label>
+  <ion-input type="text"  name="workLocationauto"  [(ngModel)]="workLocationauto" (keyup)= "autocomplate($event,workPrediction)"></ion-input>
+</ion-item>
+
+
+<ion-item *ngFor="let prediction of workPrediction" (click)="getlatlngPlaceId(prediction.place_id, prediction.description,'workLocation')">
+ <div> {{prediction.description}} </div>
+</ion-item>
+</ion-content>
+
+

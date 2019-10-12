@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Traffic</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngFor="let trafic of traficMasterData">
+        <ion-card-header>
+          
+          <ion-card-subtitle>{{trafic.destination_addresses}}</ion-card-subtitle>
+          <ion-card-subtitle>{{trafic.origin_addresses}}</ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <ion-label>
+            Distance : {{trafic.rows[0].elements[0].distance.text}}
+          </ion-label>
+          <ion-label>
+              Duration : {{trafic.rows[0].elements[0].duration.text}}
+            </ion-label>
+            <ion-label>
+                Duration in Traffic : {{trafic.rows[0].elements[0].duration_in_traffic.text}}
+              </ion-label>
+        </ion-card-content>
+      </ion-card>
+
+
+</ion-content>

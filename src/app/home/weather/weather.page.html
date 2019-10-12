@@ -1,0 +1,80 @@
+<ion-header>
+	<ion-toolbar  color="light">
+		<ion-title>weather</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+	<ion-grid class="ion-no-margin ion-no-padding">
+		<ion-row>
+			<ion-col size-sm=6 offset-sm=3>
+				<ion-segment (ionChange)="segmentChanged($event)" color="light">
+					<ion-segment-button value="home" checked>
+						<ion-icon name="home"></ion-icon>
+					</ion-segment-button>
+					<ion-segment-button value="work">
+						<ion-icon name="business"></ion-icon>
+					</ion-segment-button>
+				</ion-segment>
+			</ion-col>
+		</ion-row>
+		
+			<ion-row>
+				<ion-col size-sm=6 offset-sm=3 class="ion-no-margin ion-no-padding">
+					<div *ngIf="currentView == 'home'">
+						<div *ngFor="let wData of homeplacesMasterData">
+							<ion-card >
+								<ion-card-header class="whiteColor" class="ion-text-center">
+									<ion-card-subtitle  [ngClass]="['icon', 'icon-',wData.currently.icon]">{{wData.currently.summary}}</ion-card-subtitle>
+									<ion-card-title>{{wData.currently.apparentTemperature}} <span class="icon degreecelsius"></span></ion-card-title>
+									<ion-card-subtitle class="ion-text-uppercase">{{homeLocation}}</ion-card-subtitle>
+								</ion-card-header>
+							</ion-card>
+							<div class="backgroudFill">
+							<ion-list *ngFor="let day of wData.daily.data;let i = index">
+								<div class="item-content" detail [routerLink]="[day.time]">
+									<ion-label class="ion-text-wrap">
+										<ion-text>
+											<div class="ion-text-start left" [ngClass]="['icon',day.icon]">
+												{{day.time  | utcConverter | date: 'EEEE, d MMM'}} </div>
+											<div class="ion-text-end right">
+												{{day.apparentTemperatureHigh}} To {{day.apparentTemperatureLow}}
+											</div>
+										</ion-text>
+									</ion-label>
+								</div>
+							</ion-list>
+							</div>
+						</div>
+					</div>
+					<div *ngIf="currentView == 'work'">
+						<div *ngFor="let wData of workplacesMasterData">
+							<ion-card>
+								<ion-card-header class="ion-text-center">
+									<ion-card-subtitle  [ngClass]="['icon', 'icon-',wData.currently.icon]">{{wData.currently.summary}}</ion-card-subtitle>
+									<ion-card-title>{{wData.currently.apparentTemperature}} <span class="icon degreecelsius"></span></ion-card-title>
+									<ion-card-subtitle class="ion-text-uppercase">{{workLocation}}</ion-card-subtitle>
+								</ion-card-header>
+							</ion-card>
+							<div class="backgroudFill">
+							<ion-list *ngFor="let day of wData.daily.data;let i = index">
+								<div class="item-content" detail [routerLink]="[day.time]">
+									<ion-label class="ion-text-wrap">
+										<ion-text>
+											<div class="ion-text-start left" [ngClass]="['icon', 'icon-',day.icon]">
+												{{day.time  | utcConverter | date: 'EEEE, d MMM'}} </div>
+											<div class="ion-text-end right">
+												{{day.apparentTemperatureHigh}} To {{day.apparentTemperatureLow}}
+											</div>
+										</ion-text>
+									</ion-label>
+								</div>
+							</ion-list>
+							</div>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			
+	</ion-grid>
+</ion-content>

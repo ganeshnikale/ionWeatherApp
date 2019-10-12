@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ionWeather</string>
+    <string name="title_activity_main">ionWeather</string>
+    <string name="package_name">com.ionic.angular.weather.places</string>
+    <string name="fileprovider_authority">com.ionic.angular.weather.places.fileprovider</string>
+    <string name="custom_url_scheme">com.ionic.angular.weather.places</string>
+</resources>

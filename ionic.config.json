@@ -1,0 +1,7 @@
+{
+  "name": "ionWeather",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

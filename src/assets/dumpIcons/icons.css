@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "weatherappcons";
+    src: url("fonts/weatherappcons.eot");
+    src: url("fonts/weatherappcons.eot?#iefix") format("embedded-opentype"),
+        url("fonts/weatherappcons.woff") format("woff"),
+        url("fonts/weatherappcons.ttf") format("truetype"),
+        url("fonts/weatherappcons.svg#weatherappcons") format("svg");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+[data]:before {
+    font-family: "weatherappcons" !important;
+    content: attr(data);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon:before,
+.icon:before {
+    font-family: "weatherappcons" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.clear-day:before {
+    content: "\61";
+}
+
+.clear-night:before {
+    content: "\62";
+}
+
+.cloudy:before {
+    content: "\63";
+}
+
+.drop:before {
+    content: "\64";
+}
+
+.fog:before {
+    content: "\65";
+}
+
+.lightning:before {
+    content: "\66";
+}
+
+.lightning-1:before {
+    content: "\67";
+}
+
+.rain:before {
+    content: "\68";
+}
+
+.sleet:before {
+    content: "\69";
+}
+
+.snow:before {
+    content: "\6a";
+}
+
+.snow-1:before {
+    content: "\6b";
+}
+
+.thermometer:before {
+    content: "\6c";
+}
+
+.thunderstorm:before {
+    content: "\6d";
+}
+
+.umbrella:before {
+    content: "\6e";
+}
+
+.wind:before {
+    content: "\6f";
+}

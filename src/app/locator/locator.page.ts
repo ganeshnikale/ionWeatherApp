@@ -60,20 +60,4 @@ export class LocatorPage implements OnInit {
 		});
 		this.Predictions = [];
 	}
-
-	onGetHomeLocation(homeLocation, workLocation) {
-		this.placesservice.homeLocation = homeLocation.viewModel;
-		this.placesservice.workLocation = workLocation.viewModel;
-
-	 	// this.setLocationNameLatLng(homeLocation.viewModel, this.homeLocationName);
-		// this.setLocationNameLatLng(workLocation.viewModel, this.workLocationName);
-		// this.placesservice.homeLocationNameLatLng = this.homeLocationName;
-		// this.placesservice.workLocationNameLatLng = this.workLocationName;
-			this.router.navigateByUrl('home/tabs/places')
-		
-		
-	}
-
-
-
 }

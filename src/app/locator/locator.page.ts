@@ -1,8 +1,11 @@
+import { async } from '@angular/core/testing';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+
 import {Form, FormControl} from '@angular/forms';
 import { PlacesService } from './../home/places.service';
-import { fromEvent, of, Observable } from 'rxjs';
+import { Prediction} from './../locator/Ilocation'
+import { fromEvent, empty, of, Observable, observable } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { AutoComplateService} from './auto-complate.service'
 import { FromEventTarget } from 'rxjs/internal/observable/fromEvent';
@@ -13,20 +16,19 @@ import { FromEventTarget } from 'rxjs/internal/observable/fromEvent';
 	styleUrls: ['./locator.page.scss'],
 })
 export class LocatorPage implements OnInit {
-	homeLoc: string = '';
 
-	homeLocationName:any[] = [];
+	workLocationauto:string = '';
+	homeLocationauto:string = '';
 
-	workLocationName:any[] = [];
+	werkPridiction:Observable<Prediction[]>;
+	homePridiction:Observable<Prediction[]>;
 
-	Predictions:any[] = [];
+	homeLocationData:any[] = [];
+	workLocationData:any[] = [];
+	
 
-	workLocationauto:any ;
-	homeLocationauto:any;
+	locationData:any[] = [];
 
-	searchString: string = '';
-
-	locationDataMaster:any[] = [];
 
 	constructor(
 		private router: Router,
@@ -35,29 +37,45 @@ export class LocatorPage implements OnInit {
 		) { }
 
 	ngOnInit() {
+
+	}
+	autocomplate(event:string, setTO:string){
 		
-	}
-	autocomplate(event:string, prediction:any[]){
-
-		this.autocomplateService.autoComplate(event['target'].value).pipe(
-			map( x => x['predictions'])
-			)
-			.subscribe( abc => {
-				prediction= abc;
-				console.log(prediction);
-		})
+		 this.autocomplateService.autoComplate(event['target'].value)
+		if( setTO == 'work'){
+			this.werkPridiction = this.autocomplateService.autoComplate(event['target'].value)
+			.pipe( map ( x => x['predictions']))
+		} else {
+			this.homePridiction = this.autocomplateService.autoComplate(event['target'].value)
+			.pipe( map ( x => x['predictions']))
+		}
 	}
 
-	getlatlngPlaceId(placeId:string, pridiction:string, detailsFor:string ){
+	setLocation(pridiction:string,placeId:string, text:string,setName:string){
+		if( setName == 'work'){
+			this.workLocationauto = pridiction;
+			this.autocomplateService.latlngbyPlaceId(placeId).pipe(
+				map (x => 
+				[{ [text]: [x['results'][0].geometry][0].location, location : pridiction}]
+			))
+			.subscribe( abc =>{
+			this.workLocationData.push(abc);
+			console.log(this.workLocationData);
+			});
+		} else {
+			this.homeLocationauto = pridiction;
+			this.autocomplateService.latlngbyPlaceId(placeId).pipe(
+				map (x => 
+				[{ [text]: [x['results'][0].geometry][0].location, location : pridiction}]
+			))
+			.subscribe( abc =>{
+			this.homeLocationData.push(abc);
+			console.log(this.homeLocationData);
+			});
+		}
 
-		this.workLocationauto = pridiction;
-
-		this.autocomplateService.latlngbyPlaceId(placeId).pipe(
-			map( x => x['results'][0].geometry.location)
-			).subscribe( abc =>{
-			this.locationDataMaster= [{[detailsFor] :{"pridiction": pridiction, "latLng": abc}}];
-			console.log(this.locationDataMaster)
-		});
-		this.Predictions = [];
+		
+		this.werkPridiction = empty();
+		this.homePridiction = empty();
 	}
 }

@@ -6,14 +6,14 @@
 
 <ion-content>
 
-    <ion-card *ngFor="let trafic of traficMasterData">
+    <ion-card >
         <ion-card-header>
           
-          <ion-card-subtitle>{{trafic.destination_addresses}}</ion-card-subtitle>
-          <ion-card-subtitle>{{trafic.origin_addresses}}</ion-card-subtitle>
+          <ion-card-subtitle>{{homeLocationText}}</ion-card-subtitle>
+          <ion-card-subtitle>{{workLocationText}}</ion-card-subtitle>
         </ion-card-header>
-      
-        <ion-card-content>
+    
+        <ion-card-content *ngFor="let trafic of traficMasterData">
           <ion-label>
             Distance : {{trafic.rows[0].elements[0].distance.text}}
           </ion-label>

@@ -27,7 +27,7 @@
 								<ion-card-header class="whiteColor" class="ion-text-center">
 									<ion-card-subtitle  [ngClass]="['icon', 'icon-',wData.currently.icon]">{{wData.currently.summary}}</ion-card-subtitle>
 									<ion-card-title>{{wData.currently.apparentTemperature}} <span class="icon degreecelsius"></span></ion-card-title>
-									<ion-card-subtitle class="ion-text-uppercase">{{homeLocation}}</ion-card-subtitle>
+									<ion-card-subtitle class="ion-text-uppercase">{{homeLocationText}}</ion-card-subtitle>
 								</ion-card-header>
 							</ion-card>
 							<div class="backgroudFill">
@@ -53,7 +53,7 @@
 								<ion-card-header class="ion-text-center">
 									<ion-card-subtitle  [ngClass]="['icon', 'icon-',wData.currently.icon]">{{wData.currently.summary}}</ion-card-subtitle>
 									<ion-card-title>{{wData.currently.apparentTemperature}} <span class="icon degreecelsius"></span></ion-card-title>
-									<ion-card-subtitle class="ion-text-uppercase">{{workLocation}}</ion-card-subtitle>
+									<ion-card-subtitle class="ion-text-uppercase">{{workLocationText}}</ion-card-subtitle>
 								</ion-card-header>
 							</ion-card>
 							<div class="backgroudFill">

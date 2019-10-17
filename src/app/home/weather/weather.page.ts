@@ -14,11 +14,14 @@ export class WeatherPage implements OnInit {
   workplacesMasterData: any[] = [];
   homeplacesMasterData: any[] = [];
 
+  homeLocationText:string = this.placesservice.homeLocationData[0].location;
+  workLocationText:string = this.placesservice.workLocationData[0].location;
+
   homeLat = this.placesservice.homeLocationData[0].homepre.lat;
 	homeLng = this.placesservice.homeLocationData[0].homepre.lng;
 
-	 workLat = this.placesservice.workLocationData[0].workpre.lat;
-	 workLng = this.placesservice.workLocationData[0].workpre.lng;
+	workLat = this.placesservice.workLocationData[0].workpre.lat;
+	workLng = this.placesservice.workLocationData[0].workpre.lng;
 
   currentView: string = 'home';
 

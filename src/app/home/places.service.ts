@@ -7,25 +7,14 @@ import { Injectable } from '@angular/core';
 @Injectable({
 	providedIn: 'root'
 })
-export class PlacesService {	 
-
-	workLocation: string = '';
-
-	homeLocation: string = '';
-
-	homeLocationNameLatLng:any;
-
-	workLocationNameLatLng:any;
-
-
+export class PlacesService {
 	
-
+	homeLocationData:any[] = [];
+	workLocationData:any[] = [];
 
 	private apiKey:string = 'AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8';
 	
 	constructor(private http: HttpClient, private weatherservice: WeatherService) { }
-
-	
 
 	getLatLongs(location:string) {
 		let params = new HttpParams()
@@ -40,12 +29,10 @@ export class PlacesService {
 		.set("type", lookingfor)
 		.set("radius","1500")
 		.set("key", this.apiKey);
-
 		return this.http.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}`,{params})	
 	}
 
 	getPlaceDetails(place_id:string) {
-	
 		let params = new HttpParams()
 		.set("place_id", place_id)
 		.append("fields","name,opening_hours,photos,rating,formatted_phone_number,formatted_address,website,reference")

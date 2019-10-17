@@ -3,6 +3,8 @@ import { PlacesService } from '../places.service';
 import { ActionSheetController } from '@ionic/angular';
 import { map, filter } from 'rxjs/operators';
 import { LoadingController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+
 
 
 
@@ -16,20 +18,15 @@ import { LoadingController } from '@ionic/angular';
 export class PlacesPage implements OnInit {
 	workplacesMasterData: any[] = [];
 	homeplacesMasterData: any[] = [];
-	placePhotos: any = [];
-	showData: boolean = false;
-	homeLat: any = '';
-	homeLng: any = '';
+	
+	 homeLat = this.placesservice.homeLocationData[0].homepre.lat;
+	 homeLng = this.placesservice.homeLocationData[0].homepre.lng;
 
-	workLocation: string = '';
-	homeLocation: string = ''
-
-	homeLocationLatLng = this.placesservice.homeLocationNameLatLng;
-	workLocationLatLng = this.placesservice.workLocationNameLatLng;
+	 workLat = this.placesservice.workLocationData[0].workpre.lat;
+	 workLng = this.placesservice.workLocationData[0].workpre.lng;
 
 	currentView: string = 'home';
 
-	apiKey: string = 'AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8';
 
 	lookingFor: string = 'restaurant';
 	constructor(
@@ -38,50 +35,34 @@ export class PlacesPage implements OnInit {
 				public loadingCtrl: LoadingController) { }
 
 	ngOnInit() {
-		this.workLocation = this.placesservice.workLocation;
-		this.homeLocation = this.placesservice.homeLocation;
-
-		
+		this.getDataByType();
 	}
 
-	getDataByType() {
-		
+	 getDataByType() {
 		this.workplacesMasterData = [];
 		this.homeplacesMasterData = [];
-		this.getWorkPlacesData(this.workLocation, this.workLocationLatLng, this.workplacesMasterData, this.lookingFor);
-		this.getWorkPlacesData(this.homeLocation, this.homeLocationLatLng, this.homeplacesMasterData, this.lookingFor);
+		this.getplaces(this.homeplacesMasterData, this.homeLat, this.homeLng);
+		this.getplaces(this.workplacesMasterData, this.workLat, this.workLng);
 	}
 
-	
-	
-	getWorkPlacesData(worklocation, latlan, storeData, lookingfor) {
-
-		this.loadingCtrl.create({
-			message:'please wait',
-			keyboardClose: true,
-		}).then( lodingEl =>{
-			lodingEl.present();
-			this.placesservice.getLatLongs(worklocation)
-			.subscribe(abc => {
-				latlan = abc['results'][0].geometry.location; this.workLocation = this.placesservice.workLocation;
-				this.homeLocation = this.placesservice.homeLocation; this.workLocation = this.placesservice.workLocation;
-				this.homeLocation = this.placesservice.homeLocation;
-				let data = this.placesservice.getPlaces1(latlan.lat, latlan.lng, lookingfor)
-				data.pipe(
-					map(x => {
-						return x['results'].filter(val => { return val.photos !== undefined });
-					}),
-				).subscribe(abc => {
-					storeData.push(abc);
-				})
-			});
-			lodingEl.dismiss();
+	getplaces(setTo, lat, lng){
+		 this.placesservice.getPlaces1(lat,lng,this.lookingFor).pipe(
+			map( x => x['results'])
+		).subscribe ( abc => {
+			setTo.push(abc)
 		})
-		
 	}
-
 	
-
+	async presentLoadingWithOptions() {
+		const loading = await this.loadingCtrl.create({
+		  spinner: null,
+		  duration: 5000,
+		  message: 'Please wait...',
+		  translucent: true,
+		  cssClass: 'custom-class custom-loading'
+		});
+		return await loading.present();
+	}
 
 	segmentChanged($event) {
 		this.currentView = $event.detail.value;

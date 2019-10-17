@@ -15,18 +15,14 @@ export class TraficPage implements OnInit {
 
   ngOnInit() {
 
-    this.workLocation = this.placesservice.workLocation;
-    this.homeLocation = this.placesservice.homeLocation;
+    this.workLocation =this.placesservice.workLocationData[0].workpre.lat;
+    this.homeLocation = this.placesservice.workLocationData[0].workpre.lng;
 
 
 
-
-
-    console.log(this.distancematrixService.getDistance(this.homeLocation, this.workLocation).subscribe(
+    this.distancematrixService.getDistance(this.homeLocation, this.workLocation).subscribe(
       abc => {
         this.traficMasterData.push(abc);
-        console.log(this.traficMasterData);
-
         for(let ab of this.traficMasterData){
           console.log(ab.rows[0].elements[0].distance.text);
           for(let x of this.traficMasterData){
@@ -34,7 +30,7 @@ export class TraficPage implements OnInit {
           }
         }
       }
-    ));
+    )
   }
 
 }

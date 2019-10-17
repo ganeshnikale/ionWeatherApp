@@ -4,45 +4,29 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-    <form>
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Home Location</ion-label>
-      <ion-input type="text" name="homeLocation" ngModel #homeLocation="ngModel"></ion-input>
-    </ion-item>
+  <ion-item>
+    <ion-label position="floating">auto Work Location</ion-label>
+    <ion-input type="text" name="workLocationauto" [(ngModel)]="workLocationauto"
+      (keyup)="autocomplate($event, 'work')"></ion-input>
+  </ion-item>
 
-    <ion-item>
-        <ion-label position="floating">Work Location</ion-label>
-        <ion-input type="text" name="workLocation" ngModel #workLocation="ngModel"></ion-input>
-      </ion-item>
+  <ion-item *ngFor="let prediction of werkPridiction | async"
+    (click)="setLocation(prediction.description,prediction.place_id, 'workpre', 'work')">
+    <div> {{prediction.description}} </div>
+  </ion-item>
 
-</ion-list>
+  <ion-item>
+    <ion-label position="floating">auto Home Location</ion-label>
+    <ion-input type="text" name="homeLocationauto" [(ngModel)]="homeLocationauto"
+      (keyup)="autocomplate($event, 'home')"></ion-input>
+  </ion-item>
 
-  <ion-button type="submit" color="primary" expand="block" >
-      Search
+  <ion-item *ngFor="let prediction of homePridiction | async"
+    (click)="setLocation(prediction.description,prediction.place_id, 'homepre', 'home')">
+    <div> {{prediction.description}} </div>
+  </ion-item>
+
+  <ion-button type="submit" color="primary" expand="block" (click) ="this.navigateHome()">
+    Search
   </ion-button>
-</form>
-<ion-item>
-  <ion-label position="floating">auto Work Location</ion-label>
-  <ion-input type="text"  name="workLocationauto"  [(ngModel)]="workLocationauto" (keyup)= "autocomplate($event, 'work')"></ion-input>
-</ion-item>
-
-
-<ion-item *ngFor="let prediction of werkPridiction | async" (click) ="setLocation(prediction.description,prediction.place_id, 'workpre', 'work')">
- <div> {{prediction.description}} </div>
-</ion-item>
-
-
-
-<ion-item>
-  <ion-label position="floating">auto Home Location</ion-label>
-  <ion-input type="text"  name="homeLocationauto"  [(ngModel)]="homeLocationauto" (keyup)= "autocomplate($event, 'home')"></ion-input>
-</ion-item>
-
-
-<ion-item *ngFor="let prediction of homePridiction | async" (click) ="setLocation(prediction.description,prediction.place_id, 'homepre', 'home')">
- <div> {{prediction.description}} </div>
-</ion-item>
 </ion-content>
-
-

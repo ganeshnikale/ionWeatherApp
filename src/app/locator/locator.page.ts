@@ -23,8 +23,7 @@ export class LocatorPage implements OnInit {
 	werkPridiction:Observable<Prediction[]>;
 	homePridiction:Observable<Prediction[]>;
 
-	homeLocationData:any[] = [];
-	workLocationData:any[] = [];
+	
 	
 
 	locationData:any[] = [];
@@ -59,8 +58,9 @@ export class LocatorPage implements OnInit {
 				[{ [text]: [x['results'][0].geometry][0].location, location : pridiction}]
 			))
 			.subscribe( abc =>{
-			this.workLocationData.push(abc);
-			console.log(this.workLocationData);
+			
+				this.placesservice.workLocationData = abc;
+				console.log(this.placesservice.workLocationData)
 			});
 		} else {
 			this.homeLocationauto = pridiction;
@@ -69,13 +69,17 @@ export class LocatorPage implements OnInit {
 				[{ [text]: [x['results'][0].geometry][0].location, location : pridiction}]
 			))
 			.subscribe( abc =>{
-			this.homeLocationData.push(abc);
-			console.log(this.homeLocationData);
+			this.placesservice.homeLocationData = abc;
+			console.log(this.placesservice.homeLocationData);
 			});
 		}
 
 		
 		this.werkPridiction = empty();
 		this.homePridiction = empty();
+	}
+
+	navigateHome(){
+		this.router.navigateByUrl('/home/tabs/places')
 	}
 }

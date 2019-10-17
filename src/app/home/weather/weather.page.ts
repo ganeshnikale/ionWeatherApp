@@ -1,6 +1,8 @@
+import { map } from 'rxjs/operators';
 import { PlacesService } from './../places.service';
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from './../WeatherService';
+
 
 @Component({
   selector: 'app-weather',
@@ -8,16 +10,15 @@ import { WeatherService } from './../WeatherService';
   styleUrls: ['./weather.page.scss'],
 })
 export class WeatherPage implements OnInit {
-  weatherData: any = [];
+  
   workplacesMasterData: any[] = [];
   homeplacesMasterData: any[] = [];
-  enterLocation: string;
 
-  workLocationLatLng: any;
-  homeLocationLatLng: any;
+  homeLat = this.placesservice.homeLocationData[0].homepre.lat;
+	homeLng = this.placesservice.homeLocationData[0].homepre.lng;
 
-  workLocation: string = '';
-  homeLocation: string = '';
+	 workLat = this.placesservice.workLocationData[0].workpre.lat;
+	 workLng = this.placesservice.workLocationData[0].workpre.lng;
 
   currentView: string = 'home';
 
@@ -25,25 +26,17 @@ export class WeatherPage implements OnInit {
 
   ngOnInit() {
 
-    this.workLocation = this.placesservice.workLocation;
-    this.homeLocation = this.placesservice.homeLocation;
-
-    // this.workLocation = "thane";
-    // this.homeLocation = "kurla";
-
-    this.getPlacesweatherData(this.workLocation, this.workLocationLatLng, this.workplacesMasterData);
-    this.getPlacesweatherData(this.homeLocation, this.homeLocationLatLng, this.homeplacesMasterData);
+    
+    this.getPlacesweatherData(this.workLat, this.workLng, this.workplacesMasterData);
+    this.getPlacesweatherData(this.homeLat, this.homeLng, this.homeplacesMasterData);
+    
   }
-  getPlacesweatherData(worklocation, latlan, storeData) {
-
-    this.placesservice.getLatLongs(worklocation)
-      .subscribe(abc => {
-        latlan = abc['results'][0].geometry.location;
-        let data = this.weatherservice.getWeatherData(latlan.lat, latlan.lng)
-        data.subscribe(abc => {
-          storeData.push(abc);
-        })
-      });
+  getPlacesweatherData(lat, lng, storeData) {
+    this.weatherservice.getWeatherData(lat, lng).pipe(
+      map( x => x)
+    ).subscribe( abc => {
+      storeData.push(abc)
+    })
   }
 
   segmentChanged($event) {

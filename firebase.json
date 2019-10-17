@@ -12,7 +12,7 @@
             "source": "**",
             "destination": "dist/index.html"
         }],
-          "headers": [
+        "headers": [
         {
 
             "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",

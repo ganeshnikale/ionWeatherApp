@@ -5,7 +5,7 @@ import { HomePageModule } from './home/home.module';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'index',
+    redirectTo: 'auth',
     pathMatch: 'full'
   },
   {
@@ -16,6 +16,7 @@ const routes: Routes = [
     path: 'home',
     loadChildren: './home/home.module#HomePageModule'
   },
+  { path: 'auth', loadChildren: './auth/auth.module#AuthPageModule' },
 ];
 @NgModule({
   imports: [

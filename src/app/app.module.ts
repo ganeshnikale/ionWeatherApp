@@ -12,13 +12,20 @@ import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { from } from 'rxjs';
+import { AngularFireAuthModule} from 'angularfire2/auth'
 import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [ AngularFireModule.initializeApp(environment.firebase),AngularFireDatabaseModule, BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [ 
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule, 
+    BrowserModule,HttpClientModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    AngularFireAuthModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

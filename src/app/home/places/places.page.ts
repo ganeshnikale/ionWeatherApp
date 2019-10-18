@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 export class PlacesPage implements OnInit {
 	workplacesMasterData: any[] = [];
 	homeplacesMasterData: any[] = [];
-	
+	// flickrApiKey 44a2ed0a964544b14cd515940fa9b02b
 	 homeLat = this.placesservice.homeLocationData[0].homepre.lat;
 	 homeLng = this.placesservice.homeLocationData[0].homepre.lng;
 

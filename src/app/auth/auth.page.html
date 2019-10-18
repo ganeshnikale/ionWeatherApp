@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>auth</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div *ngIf="authService.uid | async as uid;else login">
+   user is logged in {{uid}}
+   <div *ngIf="authService.isAdmin | async as isAdmin">
+     user log in as admin and have super power
+   </div>
+   <button (click)="authService.logOut()">logout</button>
+  </div>
+</ion-content>
+<ng-template #login>
+  you need to Login <button (click)="authService.login()">login</button>
+</ng-template>

@@ -774,14 +774,17 @@ let AuthService = class AuthService {
                 return null;
             }
             else {
+                this.isLogged = true;
                 return authState.uid;
             }
         }));
     }
     login() {
-        this.afAuth.auth.signInWithPopup(new firebase__WEBPACK_IMPORTED_MODULE_4__["auth"].GoogleAuthProvider());
-        this.isLogged = true;
-        this.router.navigateByUrl('/index');
+        this.afAuth.auth.signInWithPopup(new firebase__WEBPACK_IMPORTED_MODULE_4__["auth"].GoogleAuthProvider()).then(abc => {
+            if (this.isLogged) {
+                this.router.navigateByUrl('/index');
+            }
+        });
     }
     logOut() {
         this.afAuth.auth.signOut();

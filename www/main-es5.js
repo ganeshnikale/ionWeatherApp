@@ -781,6 +781,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var AuthService = /** @class */ (function () {
     function AuthService(afAuth, router) {
+        var _this = this;
         this.afAuth = afAuth;
         this.router = router;
         this.isLogged = false;
@@ -789,14 +790,18 @@ var AuthService = /** @class */ (function () {
                 return null;
             }
             else {
+                _this.isLogged = true;
                 return authState.uid;
             }
         }));
     }
     AuthService.prototype.login = function () {
-        this.afAuth.auth.signInWithPopup(new firebase__WEBPACK_IMPORTED_MODULE_4__["auth"].GoogleAuthProvider());
-        this.isLogged = true;
-        this.router.navigateByUrl('/index');
+        var _this = this;
+        this.afAuth.auth.signInWithPopup(new firebase__WEBPACK_IMPORTED_MODULE_4__["auth"].GoogleAuthProvider()).then(function (abc) {
+            if (_this.isLogged) {
+                _this.router.navigateByUrl('/index');
+            }
+        });
     };
     AuthService.prototype.logOut = function () {
         this.afAuth.auth.signOut();

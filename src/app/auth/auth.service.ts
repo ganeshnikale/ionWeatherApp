@@ -4,28 +4,30 @@ import { Injectable } from '@angular/core';
 import { of as ObservableOf } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { auth} from 'firebase';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
-  constructor(private afAuth: AngularFireAuth) { }
-
+  constructor(private afAuth: AngularFireAuth, private router : Router) { }
+  isLogged:boolean = false;
   uid = this.afAuth.authState.pipe(
     map( authState => {
       if( !authState ){
+        
         return null;
       } else {
+       
         return  authState.uid
       }
     })
   );
-  isAdmin = ObservableOf(true);
 
   login(){
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
-
-
+    this.isLogged = true;
+    this.router.navigateByUrl('/index');
   }
   logOut(){
     this.afAuth.auth.signOut();

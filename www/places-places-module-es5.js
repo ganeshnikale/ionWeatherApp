@@ -101,6 +101,7 @@ var PlacesPage = /** @class */ (function () {
         this.loadingCtrl = loadingCtrl;
         this.workplacesMasterData = [];
         this.homeplacesMasterData = [];
+        // flickrApiKey 44a2ed0a964544b14cd515940fa9b02b
         this.homeLat = this.placesservice.homeLocationData[0].homepre.lat;
         this.homeLng = this.placesservice.homeLocationData[0].homepre.lng;
         this.workLat = this.placesservice.workLocationData[0].workpre.lat;

@@ -15,19 +15,23 @@ export class AuthService {
   uid = this.afAuth.authState.pipe(
     map( authState => {
       if( !authState ){
-        
         return null;
       } else {
-       
+        this.isLogged = true;
         return  authState.uid
       }
     })
   );
 
   login(){
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
-    this.isLogged = true;
-    this.router.navigateByUrl('/index');
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then( 
+      abc => {
+        if(this.isLogged){
+          this.router.navigateByUrl('/index');
+        }
+      }
+    );
+    
   }
   logOut(){
     this.afAuth.auth.signOut();

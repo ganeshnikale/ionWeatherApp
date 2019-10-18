@@ -24,16 +24,15 @@ export class AuthService {
   );
 
   login(){
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then( 
-      abc => {
-        if(this.isLogged){
-          this.router.navigateByUrl('/index');
-        }
-      }
-    );
-    
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
+    this.navigate();
+    // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
   }
   logOut(){
-    this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut()
+  }
+
+  navigate() {
+    this.router.navigateByUrl('/index');
   }
 }

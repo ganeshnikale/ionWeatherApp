@@ -14,7 +14,7 @@ export class AutoComplateService {
     let params = new HttpParams()
     .set("input", area)
     .set("key", this.apiKey);
-   return this.http.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?`,{params})
+    return this.http.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?`,{params})
   }
 
   latlngbyPlaceId(placeId:string){

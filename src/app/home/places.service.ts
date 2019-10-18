@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { WeatherService } from './WeatherService';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -11,6 +12,8 @@ export class PlacesService {
 	
 	homeLocationData:any[] = [];
 	workLocationData:any[] = [];
+
+	favoritePlace:Observable<any[]>;
 
 	private apiKey:string = 'AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8';
 	

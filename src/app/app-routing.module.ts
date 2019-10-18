@@ -10,11 +10,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'index',
-    loadChildren: './locator/locator.module#LocatorPageModule',
-    canLoad: [AuthGuard]
-  },
-  {
     path: 'home',
     loadChildren: './home/home.module#HomePageModule',
     canLoad: [AuthGuard]
@@ -23,7 +18,13 @@ const routes: Routes = [
     path: 'auth', 
     loadChildren: './auth/auth.module#AuthPageModule',
    },
+   {
+    path: 'index',
+    loadChildren: './locator/locator.module#LocatorPageModule',
+    canLoad: [AuthGuard]
+  },
 ];
+
 @NgModule({
   imports: [
     HomePageModule,

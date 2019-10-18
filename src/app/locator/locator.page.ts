@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 import {Form, FormControl} from '@angular/forms';
 import { PlacesService } from './../home/places.service';
 import { Prediction} from './../locator/Ilocation'
-import { fromEvent, empty, of, Observable, observable } from 'rxjs';
+import { empty, Observable } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { AutoComplateService} from './auto-complate.service'
-import { FromEventTarget } from 'rxjs/internal/observable/fromEvent';
+
 
 @Component({
 	selector: 'app-locator',
@@ -20,14 +20,10 @@ export class LocatorPage implements OnInit {
 	workLocationauto:string = '';
 	homeLocationauto:string = '';
 
-	werkPridiction:Observable<Prediction[]>;
-	homePridiction:Observable<Prediction[]>;
-
-	
-	
+	werkPridiction:Observable<any[]>;
+	homePridiction:Observable<any[]>;
 
 	locationData:any[] = [];
-
 
 	constructor(
 		private router: Router,
@@ -35,18 +31,17 @@ export class LocatorPage implements OnInit {
 		private autocomplateService: AutoComplateService
 		) { }
 
-	ngOnInit() {
+	ngOnInit() { }
 
-	}
-	autocomplate(event:string, setTO:string){
-		
+	autocomplatePridiction(event:string, setTO:string){
+
 		 this.autocomplateService.autoComplate(event['target'].value)
 		if( setTO == 'work'){
 			this.werkPridiction = this.autocomplateService.autoComplate(event['target'].value)
-			.pipe( map ( x => x['predictions']))
+			.pipe( map ( x => x['predictions']));
 		} else {
 			this.homePridiction = this.autocomplateService.autoComplate(event['target'].value)
-			.pipe( map ( x => x['predictions']))
+			.pipe( map ( x => x['predictions']));
 		}
 	}
 
@@ -58,7 +53,6 @@ export class LocatorPage implements OnInit {
 				[{ [text]: [x['results'][0].geometry][0].location, location : pridiction}]
 			))
 			.subscribe( abc =>{
-			
 				this.placesservice.workLocationData = abc;
 				console.log(this.placesservice.workLocationData)
 			});
@@ -73,7 +67,6 @@ export class LocatorPage implements OnInit {
 			console.log(this.placesservice.homeLocationData);
 			});
 		}
-
 		
 		this.werkPridiction = empty();
 		this.homePridiction = empty();

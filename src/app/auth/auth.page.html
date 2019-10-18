@@ -1,18 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>auth</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-title>Authentication </ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-<div *ngIf="authService.uid | async as uid;else login">
-   user is logged in {{uid}}
-   <div *ngIf="authService.isAdmin | async as isAdmin">
-     user log in as admin and have super power
-   </div>
-   <button (click)="authService.logOut()">logout</button>
-  </div>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col size-sm=6 offset-sm=3>
+				<div *ngIf="authService.uid | async as uid;else login">
+					user is logged in {{uid}}
+					<button (click)="authService.logOut()">logout</button>
+				</div>
+				<ng-template #login>
+					<ion-item text-center>
+						<h1 class="text-center">Login with google Account </h1>
+					</ion-item>
+					<ion-text>
+						<ion-button (click)="authService.login()" color="primary" expand="block">login</ion-button>
+					</ion-text>	
+				</ng-template>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 </ion-content>
-<ng-template #login>
-  you need to Login <button (click)="authService.login()">login</button>
-</ng-template>

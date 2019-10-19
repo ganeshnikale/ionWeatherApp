@@ -27,7 +27,7 @@ export class LocatorPage implements OnInit {
 
 	constructor(
 		private router: Router,
-		private placesservice: PlacesService,
+		public placesservice: PlacesService,
 		private autocomplateService: AutoComplateService
 		) { }
 
@@ -47,6 +47,7 @@ export class LocatorPage implements OnInit {
 
 	setLocation(pridiction:string,placeId:string, text:string,setName:string){
 		if( setName == 'work'){
+			console.log(this.workLocationauto.length)
 			this.workLocationauto = pridiction;
 			this.autocomplateService.latlngbyPlaceId(placeId).pipe(
 				map (x => 
@@ -54,7 +55,6 @@ export class LocatorPage implements OnInit {
 			))
 			.subscribe( abc =>{
 				this.placesservice.workLocationData = abc;
-				console.log(this.placesservice.workLocationData)
 			});
 		} else {
 			this.homeLocationauto = pridiction;
@@ -64,7 +64,6 @@ export class LocatorPage implements OnInit {
 			))
 			.subscribe( abc =>{
 			this.placesservice.homeLocationData = abc;
-			console.log(this.placesservice.homeLocationData);
 			});
 		}
 		

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>auth</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n<div *ngIf=\"authService.uid | async as uid;else login\">\n   user is logged in {{uid}}\n   <div *ngIf=\"authService.isAdmin | async as isAdmin\">\n     user log in as admin and have super power\n   </div>\n   <button (click)=\"authService.logOut()\">logout</button>\n  </div>\n</ion-content>\n<ng-template #login>\n  you need to Login <button (click)=\"authService.login()\">login</button>\n</ng-template>"
+module.exports = "<ion-header>\n\t<ion-toolbar color=\"light\">\n\t\t<ion-title>Authentication </ion-title>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content class=\"background\">\n\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col size-sm=6 offset-sm=3>\n\t\t\t\t<div *ngIf=\"authService.uid | async as uid;else login\">\n\t\t\t\t\tuser is logged in {{uid}}\n\t\t\t\t\t<button (click)=\"authService.logOut()\">logout</button>\n\t\t\t\t</div>\n\t\t\t\t<ng-template #login>\n\t\t\t\t\t<ion-text>\n\t\t\t\t\t\t<ion-button (click)=\"authService.login()\" color=\"primary\" expand=\"block\">Login with google Account </ion-button>\n\t\t\t\t\t</ion-text>\t\n\t\t\t\t</ng-template>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n</ion-content>"
 
 /***/ }),
 

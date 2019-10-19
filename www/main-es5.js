@@ -496,7 +496,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\n    <ion-menu contentId=\"content1\" side=\"start\" class=\"mainMenu\">\n        <ion-header class=\"mainMenu\">\n          <ion-toolbar>\n            <ion-title>Welcome {{authService.userName}}</ion-title>\n          </ion-toolbar>\n        </ion-header>\n        <ion-content class=\"mainMenu\">\n          <ion-list>\n            <ion-menu-toggle>\n              <ion-item routerLink=\"/index\" button>\n                <ion-icon name=\"search\" slot=\"start\"></ion-icon>\n                <ion-label>Navigator</ion-label>\n              </ion-item>\n    \n              <ion-item (click)=\"authService.logOut()\" button>\n                <ion-icon name=\"book\" slot=\"start\"></ion-icon>\n                <ion-label>Logout</ion-label>\n              </ion-item>\n    \n            </ion-menu-toggle>\n          </ion-list>\n        </ion-content>\n      </ion-menu>\n  <ion-router-outlet  id=\"content1\"></ion-router-outlet>\n</ion-app>\n"
 
 /***/ }),
 
@@ -538,11 +538,6 @@ var routes = [
         pathMatch: 'full'
     },
     {
-        path: 'index',
-        loadChildren: './locator/locator.module#LocatorPageModule',
-        canLoad: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]]
-    },
-    {
         path: 'home',
         loadChildren: './home/home.module#HomePageModule',
         canLoad: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]]
@@ -550,6 +545,11 @@ var routes = [
     {
         path: 'auth',
         loadChildren: './auth/auth.module#AuthPageModule',
+    },
+    {
+        path: 'index',
+        loadChildren: './locator/locator.module#LocatorPageModule',
+        canLoad: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]]
     },
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -578,7 +578,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJ9 */"
+module.exports = ".mainMenu {\n  background: #ffffff;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi92YXIvd3d3L2h0bWwvaW9uV2VhdGhlcjIuMC9pb25XZWF0aGVyQXBwLTEvc3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLG1CQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWFpbk1lbnV7XG4gICAgYmFja2dyb3VuZDogI2ZmZmZmZjtcbn0iLCIubWFpbk1lbnUge1xuICBiYWNrZ3JvdW5kOiAjZmZmZmZmO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -593,20 +593,23 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth/auth.service */ "./src/app/auth/auth.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+
 
 
 
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar) {
+    function AppComponent(platform, splashScreen, statusBar, authService) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.authService = authService;
         this.initializeApp();
     }
     AppComponent.prototype.initializeApp = function () {
@@ -617,19 +620,21 @@ var AppComponent = /** @class */ (function () {
         });
     };
     AppComponent.ctorParameters = function () { return [
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
-        { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
-        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
+        { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"] },
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
+        { type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"] }
     ]; };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
-            _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
+            _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
+            _auth_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -784,6 +789,7 @@ var AuthService = /** @class */ (function () {
         var _this = this;
         this.afAuth = afAuth;
         this.router = router;
+        this.userName = '';
         this.isLogged = false;
         this.uid = this.afAuth.authState.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (authState) {
             if (!authState) {
@@ -791,6 +797,7 @@ var AuthService = /** @class */ (function () {
             }
             else {
                 _this.isLogged = true;
+                _this.navigate();
                 return authState.uid;
             }
         }));
@@ -798,13 +805,17 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.login = function () {
         var _this = this;
         this.afAuth.auth.signInWithPopup(new firebase__WEBPACK_IMPORTED_MODULE_4__["auth"].GoogleAuthProvider()).then(function (abc) {
-            if (_this.isLogged) {
-                _this.router.navigateByUrl('/index');
-            }
+            _this.userName = abc.user.displayName;
+            _this.navigate();
+            console.log(_this.userName);
         });
     };
     AuthService.prototype.logOut = function () {
-        this.afAuth.auth.signOut();
+        var _this = this;
+        this.afAuth.auth.signOut().then(function (abc) { _this.router.navigateByUrl('/auth'); });
+    };
+    AuthService.prototype.navigate = function () {
+        this.router.navigateByUrl('/index');
     };
     AuthService.ctorParameters = function () { return [
         { type: angularfire2_auth__WEBPACK_IMPORTED_MODULE_1__["AngularFireAuth"] },

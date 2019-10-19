@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>locator</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content padding>\n  <ion-item>\n    <ion-label position=\"floating\">auto Work Location</ion-label>\n    <ion-input type=\"text\" name=\"workLocationauto\" [(ngModel)]=\"workLocationauto\"\n      (keyup)=\"autocomplate($event, 'work')\"></ion-input>\n  </ion-item>\n\n  <ion-item *ngFor=\"let prediction of werkPridiction | async\"\n    (click)=\"setLocation(prediction.description,prediction.place_id, 'workpre', 'work')\">\n    <div> {{prediction.description}} </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\">auto Home Location</ion-label>\n    <ion-input type=\"text\" name=\"homeLocationauto\" [(ngModel)]=\"homeLocationauto\"\n      (keyup)=\"autocomplate($event, 'home')\"></ion-input>\n  </ion-item>\n\n  <ion-item *ngFor=\"let prediction of homePridiction | async\"\n    (click)=\"setLocation(prediction.description,prediction.place_id, 'homepre', 'home')\">\n    <div> {{prediction.description}} </div>\n  </ion-item>\n\n  <ion-button type=\"submit\" color=\"primary\" expand=\"block\" (click) =\"this.navigateHome()\">\n    Search\n  </ion-button>\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-menu-button></ion-menu-button>\n      </ion-buttons>\n    <ion-title>locator</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content padding>\n  <ion-item>\n    <ion-label position=\"floating\">Enter Work Location</ion-label>\n    <ion-input type=\"text\" name=\"workLocationauto\" [(ngModel)]=\"workLocationauto\"\n      (keyup)=\"autocomplatePridiction($event, 'work')\"></ion-input>\n  </ion-item>\n\n  <ion-item *ngFor=\"let prediction of werkPridiction | async\"\n    (click)=\"setLocation(prediction.description,prediction.place_id, 'workpre', 'work')\">\n    <div> {{prediction.description}} </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\">Enter Home Location</ion-label>\n    <ion-input type=\"text\" name=\"homeLocationauto\" [(ngModel)]=\"homeLocationauto\"\n      (keyup)=\"autocomplatePridiction($event, 'home')\"></ion-input>\n  </ion-item>\n\n  <ion-item *ngFor=\"let prediction of homePridiction | async\"\n    (click)=\"setLocation(prediction.description,prediction.place_id, 'homepre', 'home')\">\n    <div> {{prediction.description}} </div>\n  </ion-item>\n\n  <ion-button type=\"submit\" color=\"primary\" expand=\"block\" (click) =\"this.navigateHome()\" [disabled]=\"(!placesservice.workLocationData.length) || (!placesservice.homeLocationData.length)\">\n    Search\n  </ion-button>\n</ion-content>"
 
 /***/ }),
 
@@ -155,9 +155,8 @@ var LocatorPage = /** @class */ (function () {
         this.homeLocationauto = '';
         this.locationData = [];
     }
-    LocatorPage.prototype.ngOnInit = function () {
-    };
-    LocatorPage.prototype.autocomplate = function (event, setTO) {
+    LocatorPage.prototype.ngOnInit = function () { };
+    LocatorPage.prototype.autocomplatePridiction = function (event, setTO) {
         this.autocomplateService.autoComplate(event['target'].value);
         if (setTO == 'work') {
             this.werkPridiction = this.autocomplateService.autoComplate(event['target'].value)
@@ -171,6 +170,7 @@ var LocatorPage = /** @class */ (function () {
     LocatorPage.prototype.setLocation = function (pridiction, placeId, text, setName) {
         var _this = this;
         if (setName == 'work') {
+            console.log(this.workLocationauto.length);
             this.workLocationauto = pridiction;
             this.autocomplateService.latlngbyPlaceId(placeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (x) {
                 var _a;
@@ -178,7 +178,6 @@ var LocatorPage = /** @class */ (function () {
             }))
                 .subscribe(function (abc) {
                 _this.placesservice.workLocationData = abc;
-                console.log(_this.placesservice.workLocationData);
             });
         }
         else {
@@ -189,7 +188,6 @@ var LocatorPage = /** @class */ (function () {
             }))
                 .subscribe(function (abc) {
                 _this.placesservice.homeLocationData = abc;
-                console.log(_this.placesservice.homeLocationData);
             });
         }
         this.werkPridiction = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["empty"])();

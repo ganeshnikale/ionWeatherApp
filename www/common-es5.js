@@ -581,18 +581,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _WeatherService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WeatherService */ "./src/app/home/WeatherService.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! angularfire2/database */ "./node_modules/angularfire2/database/index.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(angularfire2_database__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
 
 var PlacesService = /** @class */ (function () {
-    function PlacesService(http, weatherservice) {
+    function PlacesService(http, weatherservice, afdb) {
         this.http = http;
         this.weatherservice = weatherservice;
+        this.afdb = afdb;
         this.homeLocationData = [];
         this.workLocationData = [];
+        this.favoritePlace = [];
         this.apiKey = 'AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8';
     }
+    PlacesService.prototype.setfavoritePlace = function (favoritePlaceId) {
+        console.log('aaa');
+        this.afdb.list('favoritePlace').push(favoritePlaceId);
+        this.afdb.list('favoritePlace').valueChanges().subscribe(function (abc) {
+            console.log(abc);
+        });
+    };
     PlacesService.prototype.getLatLongs = function (location) {
         var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]()
             .set("address", location)
@@ -615,13 +627,16 @@ var PlacesService = /** @class */ (function () {
     };
     PlacesService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
-        { type: _WeatherService__WEBPACK_IMPORTED_MODULE_1__["WeatherService"] }
+        { type: _WeatherService__WEBPACK_IMPORTED_MODULE_1__["WeatherService"] },
+        { type: angularfire2_database__WEBPACK_IMPORTED_MODULE_4__["AngularFireDatabase"] }
     ]; };
     PlacesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _WeatherService__WEBPACK_IMPORTED_MODULE_1__["WeatherService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            _WeatherService__WEBPACK_IMPORTED_MODULE_1__["WeatherService"],
+            angularfire2_database__WEBPACK_IMPORTED_MODULE_4__["AngularFireDatabase"]])
     ], PlacesService);
     return PlacesService;
 }());

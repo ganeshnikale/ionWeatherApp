@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content padding>
   <ion-item>
-    <ion-label position="floating">auto Work Location</ion-label>
+    <ion-label position="floating">Enter Work Location</ion-label>
     <ion-input type="text" name="workLocationauto" [(ngModel)]="workLocationauto"
       (keyup)="autocomplatePridiction($event, 'work')"></ion-input>
   </ion-item>
@@ -19,7 +19,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">auto Home Location</ion-label>
+    <ion-label position="floating">Enter Home Location</ion-label>
     <ion-input type="text" name="homeLocationauto" [(ngModel)]="homeLocationauto"
       (keyup)="autocomplatePridiction($event, 'home')"></ion-input>
   </ion-item>
@@ -29,7 +29,7 @@
     <div> {{prediction.description}} </div>
   </ion-item>
 
-  <ion-button type="submit" color="primary" expand="block" (click) ="this.navigateHome()">
+  <ion-button type="submit" color="primary" expand="block" (click) ="this.navigateHome()" [disabled]="(!placesservice.workLocationData.length) || (!placesservice.homeLocationData.length)">
     Search
   </ion-button>
 </ion-content>

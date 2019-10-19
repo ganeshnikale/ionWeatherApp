@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>locator</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content padding>\n  <ion-item>\n    <ion-label position=\"floating\">auto Work Location</ion-label>\n    <ion-input type=\"text\" name=\"workLocationauto\" [(ngModel)]=\"workLocationauto\"\n      (keyup)=\"autocomplate($event, 'work')\"></ion-input>\n  </ion-item>\n\n  <ion-item *ngFor=\"let prediction of werkPridiction | async\"\n    (click)=\"setLocation(prediction.description,prediction.place_id, 'workpre', 'work')\">\n    <div> {{prediction.description}} </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\">auto Home Location</ion-label>\n    <ion-input type=\"text\" name=\"homeLocationauto\" [(ngModel)]=\"homeLocationauto\"\n      (keyup)=\"autocomplate($event, 'home')\"></ion-input>\n  </ion-item>\n\n  <ion-item *ngFor=\"let prediction of homePridiction | async\"\n    (click)=\"setLocation(prediction.description,prediction.place_id, 'homepre', 'home')\">\n    <div> {{prediction.description}} </div>\n  </ion-item>\n\n  <ion-button type=\"submit\" color=\"primary\" expand=\"block\" (click) =\"this.navigateHome()\">\n    Search\n  </ion-button>\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-menu-button></ion-menu-button>\n      </ion-buttons>\n    <ion-title>locator</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content padding>\n  <ion-item>\n    <ion-label position=\"floating\">Enter Work Location</ion-label>\n    <ion-input type=\"text\" name=\"workLocationauto\" [(ngModel)]=\"workLocationauto\"\n      (keyup)=\"autocomplatePridiction($event, 'work')\"></ion-input>\n  </ion-item>\n\n  <ion-item *ngFor=\"let prediction of werkPridiction | async\"\n    (click)=\"setLocation(prediction.description,prediction.place_id, 'workpre', 'work')\">\n    <div> {{prediction.description}} </div>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\">Enter Home Location</ion-label>\n    <ion-input type=\"text\" name=\"homeLocationauto\" [(ngModel)]=\"homeLocationauto\"\n      (keyup)=\"autocomplatePridiction($event, 'home')\"></ion-input>\n  </ion-item>\n\n  <ion-item *ngFor=\"let prediction of homePridiction | async\"\n    (click)=\"setLocation(prediction.description,prediction.place_id, 'homepre', 'home')\">\n    <div> {{prediction.description}} </div>\n  </ion-item>\n\n  <ion-button type=\"submit\" color=\"primary\" expand=\"block\" (click) =\"this.navigateHome()\" [disabled]=\"(!placesservice.workLocationData.length) || (!placesservice.homeLocationData.length)\">\n    Search\n  </ion-button>\n</ion-content>"
 
 /***/ }),
 
@@ -151,9 +151,8 @@ let LocatorPage = class LocatorPage {
         this.homeLocationauto = '';
         this.locationData = [];
     }
-    ngOnInit() {
-    }
-    autocomplate(event, setTO) {
+    ngOnInit() { }
+    autocomplatePridiction(event, setTO) {
         this.autocomplateService.autoComplate(event['target'].value);
         if (setTO == 'work') {
             this.werkPridiction = this.autocomplateService.autoComplate(event['target'].value)
@@ -166,11 +165,11 @@ let LocatorPage = class LocatorPage {
     }
     setLocation(pridiction, placeId, text, setName) {
         if (setName == 'work') {
+            console.log(this.workLocationauto.length);
             this.workLocationauto = pridiction;
             this.autocomplateService.latlngbyPlaceId(placeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(x => [{ [text]: [x['results'][0].geometry][0].location, location: pridiction }]))
                 .subscribe(abc => {
                 this.placesservice.workLocationData = abc;
-                console.log(this.placesservice.workLocationData);
             });
         }
         else {
@@ -178,7 +177,6 @@ let LocatorPage = class LocatorPage {
             this.autocomplateService.latlngbyPlaceId(placeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(x => [{ [text]: [x['results'][0].geometry][0].location, location: pridiction }]))
                 .subscribe(abc => {
                 this.placesservice.homeLocationData = abc;
-                console.log(this.placesservice.homeLocationData);
             });
         }
         this.werkPridiction = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["empty"])();

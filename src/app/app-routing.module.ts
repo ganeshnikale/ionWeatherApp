@@ -23,6 +23,11 @@ const routes: Routes = [
     loadChildren: './locator/locator.module#LocatorPageModule',
     canLoad: [AuthGuard]
   },
+  { 
+    path: 'favorite-palces', 
+    loadChildren: './favorite-palces/favorite-palces.module#FavoritePalcesPageModule',
+    canLoad: [AuthGuard]
+   },
 ];
 
 @NgModule({

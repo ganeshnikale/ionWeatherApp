@@ -15,7 +15,7 @@ export class PlacesService {
 	homeLocationData:any[] = [];
 	workLocationData:any[] = [];
 
-	favoritePlace:any[] = [];
+	favoritePlace:Observable<any[]>;
 
 	private apiKey:string = 'AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8';
 	
@@ -29,11 +29,6 @@ export class PlacesService {
 	setfavoritePlace(favoritePlaceId){
 		console.log(favoritePlaceId)
 		this.afdb.list('favoritePlace').push(favoritePlaceId);
-
-		
-		this.afdb.list('favoritePlace').valueChanges().subscribe( abc =>{
-			console.log(abc);
-		})
 	}
 	getLatLongs(location:string) {
 		let params = new HttpParams()

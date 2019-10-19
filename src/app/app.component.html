@@ -12,7 +12,12 @@
                 <ion-icon name="search" slot="start"></ion-icon>
                 <ion-label>Navigator</ion-label>
               </ion-item>
-    
+
+              <ion-item routerLink="/favorite-palces" button>
+                <ion-icon name="search" slot="start"></ion-icon>
+                <ion-label>Your Favorite Places</ion-label>
+              </ion-item>
+              
               <ion-item (click)="authService.logOut()" button>
                 <ion-icon name="book" slot="start"></ion-icon>
                 <ion-label>Logout</ion-label>

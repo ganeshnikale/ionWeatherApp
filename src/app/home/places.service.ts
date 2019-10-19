@@ -27,8 +27,10 @@ export class PlacesService {
 
 	
 	setfavoritePlace(favoritePlaceId){
-		console.log('aaa')
-		this.afdb.list('favoritePlace').push(favoritePlaceId)
+		console.log(favoritePlaceId)
+		this.afdb.list('favoritePlace').push(favoritePlaceId);
+
+		
 		this.afdb.list('favoritePlace').valueChanges().subscribe( abc =>{
 			console.log(abc);
 		})

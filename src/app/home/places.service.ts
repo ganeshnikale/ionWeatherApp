@@ -2,6 +2,8 @@ import { Observable } from 'rxjs';
 import { WeatherService } from './WeatherService';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { map } from 'rxjs/operators';
 
 
  
@@ -13,12 +15,24 @@ export class PlacesService {
 	homeLocationData:any[] = [];
 	workLocationData:any[] = [];
 
-	favoritePlace:Observable<any[]>;
+	favoritePlace:any[] = [];
 
 	private apiKey:string = 'AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8';
 	
-	constructor(private http: HttpClient, private weatherservice: WeatherService) { }
+	constructor(
+		 private http: HttpClient,
+		 private weatherservice: WeatherService,
+		 private afdb: AngularFireDatabase
+		 ) { }
 
+	
+	setfavoritePlace(favoritePlaceId){
+		console.log('aaa')
+		this.afdb.list('favoritePlace').push(favoritePlaceId)
+		this.afdb.list('favoritePlace').valueChanges().subscribe( abc =>{
+			console.log(abc);
+		})
+	}
 	getLatLongs(location:string) {
 		let params = new HttpParams()
 		.set("address",location)

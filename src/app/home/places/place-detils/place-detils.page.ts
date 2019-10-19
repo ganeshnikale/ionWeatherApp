@@ -18,7 +18,6 @@ export class PlaceDetilsPage implements OnInit {
         private placesservice: PlacesService
      ) { }
   ngOnInit() {
- 
     this.activerouter.queryParamMap.subscribe( abc => {
       console.log(abc.get('place_id'));
 
@@ -34,9 +33,9 @@ export class PlaceDetilsPage implements OnInit {
     speed: 400
   };
  addToFavorite(favoritePlaceId){
-   console.log(favoritePlaceId)
-   favoritePlaceId.push(this.placesservice.favoritePlace);
-   console.log(this.placesservice.favoritePlace);
+  
+  this.placesservice.setfavoritePlace(favoritePlaceId);
+   
  }
 
 }

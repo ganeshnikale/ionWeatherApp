@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  
+  userName:string = '';
   constructor(private afAuth: AngularFireAuth, private router : Router) { }
   isLogged:boolean = false;
   uid = this.afAuth.authState.pipe(
@@ -18,18 +18,25 @@ export class AuthService {
         return null;
       } else {
         this.isLogged = true;
+        this.navigate();
         return  authState.uid
       }
     })
   );
-
   login(){
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
-    this.navigate();
-    // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
+      abc => {
+         this.userName = abc.user.displayName; 
+         this.navigate();
+         console.log(this.userName)
+        } 
+    )
   }
+
   logOut(){
-    this.afAuth.auth.signOut()
+    this.afAuth.auth.signOut().then(
+      abc => { this.router.navigateByUrl('/auth')}
+    )
   }
 
   navigate() {

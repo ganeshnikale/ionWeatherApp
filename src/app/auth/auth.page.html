@@ -1,10 +1,10 @@
 <ion-header>
-	<ion-toolbar>
+	<ion-toolbar color="light">
 		<ion-title>Authentication </ion-title>
 	</ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="background">
 
 	<ion-grid>
 		<ion-row>
@@ -14,12 +14,13 @@
 					<button (click)="authService.logOut()">logout</button>
 				</div>
 				<ng-template #login>
-					<ion-item text-center>
-						<h1 class="text-center">Login with google Account </h1>
-					</ion-item>
 					<ion-text>
-						<ion-button (click)="authService.login()" color="primary" expand="block">login</ion-button>
+						<ion-button (click)="authService.login()" color="primary" expand="block">Login with google Account </ion-button>
 					</ion-text>	
+
+					<ion-text>
+							<ion-button (click)="authService.login()" color="primary" expand="block">Login with google Account </ion-button>
+						</ion-text>	
 				</ng-template>
 			</ion-col>
 		</ion-row>

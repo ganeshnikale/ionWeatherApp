@@ -12,7 +12,7 @@
   <ion-list *ngFor="let place of this.Fplaces | async">
     <div class="item-content" detail>
       <ion-item>
-      <ion-label [routerLink]=[i] [queryParams]="{place_id: place.place_id}">
+      <ion-label >
         <ion-text color="primary">
           <h3>{{place.name}}</h3>
         </ion-text>

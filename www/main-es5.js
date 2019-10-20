@@ -12,6 +12,10 @@ var map = {
 		"./src/app/auth/auth.module.ts",
 		"auth-auth-module"
 	],
+	"./favorite-palces/favorite-palces.module": [
+		"./src/app/favorite-palces/favorite-palces.module.ts",
+		"favorite-palces-favorite-palces-module"
+	],
 	"./home/home.module": [
 		"./src/app/home/home.module.ts"
 	],
@@ -496,7 +500,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n    <ion-menu contentId=\"content1\" side=\"start\" class=\"mainMenu\">\n        <ion-header class=\"mainMenu\">\n          <ion-toolbar>\n            <ion-title>Welcome {{authService.userName}}</ion-title>\n          </ion-toolbar>\n        </ion-header>\n        <ion-content class=\"mainMenu\">\n          <ion-list>\n            <ion-menu-toggle>\n              <ion-item routerLink=\"/index\" button>\n                <ion-icon name=\"search\" slot=\"start\"></ion-icon>\n                <ion-label>Navigator</ion-label>\n              </ion-item>\n    \n              <ion-item (click)=\"authService.logOut()\" button>\n                <ion-icon name=\"book\" slot=\"start\"></ion-icon>\n                <ion-label>Logout</ion-label>\n              </ion-item>\n    \n            </ion-menu-toggle>\n          </ion-list>\n        </ion-content>\n      </ion-menu>\n  <ion-router-outlet  id=\"content1\"></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\n    <ion-menu contentId=\"content1\" side=\"start\" class=\"mainMenu\">\n        <ion-header class=\"mainMenu\">\n          <ion-toolbar>\n            <ion-title>Welcome {{authService.userName}}</ion-title>\n          </ion-toolbar>\n        </ion-header>\n        <ion-content class=\"mainMenu\">\n          <ion-list>\n            <ion-menu-toggle>\n              <ion-item routerLink=\"/index\" button>\n                <ion-icon name=\"search\" slot=\"start\"></ion-icon>\n                <ion-label>Navigator</ion-label>\n              </ion-item>\n\n              <ion-item routerLink=\"/favorite-palces\" button>\n                <ion-icon name=\"search\" slot=\"start\"></ion-icon>\n                <ion-label>Your Favorite Places</ion-label>\n              </ion-item>\n              \n              <ion-item (click)=\"authService.logOut()\" button>\n                <ion-icon name=\"book\" slot=\"start\"></ion-icon>\n                <ion-label>Logout</ion-label>\n              </ion-item>\n    \n            </ion-menu-toggle>\n          </ion-list>\n        </ion-content>\n      </ion-menu>\n  <ion-router-outlet  id=\"content1\"></ion-router-outlet>\n</ion-app>\n"
 
 /***/ }),
 
@@ -549,6 +553,11 @@ var routes = [
     {
         path: 'index',
         loadChildren: './locator/locator.module#LocatorPageModule',
+        canLoad: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]]
+    },
+    {
+        path: 'favorite-palces',
+        loadChildren: './favorite-palces/favorite-palces.module#FavoritePalcesPageModule',
         canLoad: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]]
     },
 ];

@@ -3,7 +3,7 @@ import { WeatherService } from './WeatherService';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { map } from 'rxjs/operators';
+import {AngularFireAuth } from 'angularfire2/auth';
 
 
  
@@ -22,13 +22,14 @@ export class PlacesService {
 	constructor(
 		 private http: HttpClient,
 		 private weatherservice: WeatherService,
-		 private afdb: AngularFireDatabase
+		 private afdb: AngularFireDatabase,
+		 private afAuth: AngularFireAuth,
 		 ) { }
 
-	
 	setfavoritePlace(favoritePlaceId){
-		console.log(favoritePlaceId)
-		this.afdb.list('favoritePlace').push(favoritePlaceId);
+		this.afAuth.authState.subscribe( user => {
+			console.log(user);
+		})
 	}
 	getLatLongs(location:string) {
 		let params = new HttpParams()

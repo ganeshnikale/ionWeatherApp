@@ -595,15 +595,11 @@ var PlacesService = /** @class */ (function () {
         this.afdb = afdb;
         this.homeLocationData = [];
         this.workLocationData = [];
-        this.favoritePlace = [];
         this.apiKey = 'AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8';
     }
     PlacesService.prototype.setfavoritePlace = function (favoritePlaceId) {
-        console.log('aaa');
+        console.log(favoritePlaceId);
         this.afdb.list('favoritePlace').push(favoritePlaceId);
-        this.afdb.list('favoritePlace').valueChanges().subscribe(function (abc) {
-            console.log(abc);
-        });
     };
     PlacesService.prototype.getLatLongs = function (location) {
         var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]()

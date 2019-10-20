@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   userName:string = '';
+  userId:string = '';
   constructor(private afAuth: AngularFireAuth, private router : Router) { }
   isLogged:boolean = false;
   uid = this.afAuth.authState.pipe(
@@ -19,6 +20,7 @@ export class AuthService {
       } else {
         this.isLogged = true;
         this.navigate();
+        this.userId = authState.uid;
         return  authState.uid
       }
     })

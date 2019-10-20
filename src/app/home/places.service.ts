@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Observable } from 'rxjs';
 import { WeatherService } from './WeatherService';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
@@ -24,12 +25,11 @@ export class PlacesService {
 		 private weatherservice: WeatherService,
 		 private afdb: AngularFireDatabase,
 		 private afAuth: AngularFireAuth,
+		 private AuthService: AuthService
 		 ) { }
 
 	setfavoritePlace(favoritePlaceId){
-		this.afAuth.authState.subscribe( user => {
-			console.log(user);
-		})
+		this.afdb.list(`favoritePlace/${this.AuthService.userId}`).push(favoritePlaceId);
 	}
 	getLatLongs(location:string) {
 		let params = new HttpParams()

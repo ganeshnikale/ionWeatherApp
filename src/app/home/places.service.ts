@@ -5,6 +5,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import {AngularFireAuth } from 'angularfire2/auth';
+import { map,filter, find, reduce } from 'rxjs/operators';
 
 
  
@@ -16,6 +17,10 @@ export class PlacesService {
 	homeLocationData:any[] = [];
 	workLocationData:any[] = [];
 
+	newFavoritePlace:boolean = false;
+
+	
+
 	favoritePlace:Observable<any[]>;
 
 	private apiKey:string = 'AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8';
@@ -25,11 +30,21 @@ export class PlacesService {
 		 private weatherservice: WeatherService,
 		 private afdb: AngularFireDatabase,
 		 private afAuth: AngularFireAuth,
-		 private AuthService: AuthService
+		 private AuthService: AuthService,
 		 ) { }
 
 	setfavoritePlace(favoritePlaceId){
-		this.afdb.list(`favoritePlace/${this.AuthService.userId}`).push(favoritePlaceId);
+		this.afdb.list(`favoritePlace/${this.AuthService.userId}`).valueChanges().pipe(
+			map( val => val)
+		).subscribe( data => {
+			console.log(data['reference'])
+		})
+	
+		if(this.newFavoritePlace = true){
+			console.log('place Add');
+			this.afdb.list(`favoritePlace/${this.AuthService.userId}`).push(favoritePlaceId);
+		}
+		
 	}
 	getLatLongs(location:string) {
 		let params = new HttpParams()

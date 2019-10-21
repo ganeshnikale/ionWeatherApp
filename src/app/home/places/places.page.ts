@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 
 
 
+
 @Component({
 	selector: 'app-places',
 	templateUrl: './places.page.html',
@@ -32,37 +33,36 @@ export class PlacesPage implements OnInit {
 	constructor(
 				private placesservice: PlacesService, 
 				public actionSheetController: ActionSheetController,
-				public loadingCtrl: LoadingController) { }
+				private LoadingCtrl:LoadingController
+				) { }
 
 	ngOnInit() {
 		this.getDataByType();
 	}
 
-	 getDataByType() {
-		this.workplacesMasterData = [];
-		this.homeplacesMasterData = [];
-		this.getplaces(this.homeplacesMasterData, this.homeLat, this.homeLng);
-		this.getplaces(this.workplacesMasterData, this.workLat, this.workLng);
+	async getDataByType() {
+			this.workplacesMasterData = [];
+			this.homeplacesMasterData = [];
+			this.getplaces(this.homeplacesMasterData, this.homeLat, this.homeLng);
+			this.getplaces(this.workplacesMasterData, this.workLat, this.workLng);
 	}
 
-	getplaces(setTo, lat, lng){
+	async getplaces(setTo, lat, lng){
+		await this.LoadingCtrl.create({
+			message: 'please Wait'
+		}).then( loadingEl =>{
+			loadingEl.present();
+
 		 this.placesservice.getPlaces1(lat,lng,this.lookingFor).pipe(
 			map( x => x['results'])
 		).subscribe ( abc => {
+			loadingEl.dismiss()
 			setTo.push(abc)
 		})
+		
+	})
 	}
-	
-	async presentLoadingWithOptions() {
-		const loading = await this.loadingCtrl.create({
-		  spinner: null,
-		  duration: 5000,
-		  message: 'Please wait...',
-		  translucent: true,
-		  cssClass: 'custom-class custom-loading'
-		});
-		return await loading.present();
-	}
+
 
 	segmentChanged($event) {
 		this.currentView = $event.detail.value;

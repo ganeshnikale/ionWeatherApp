@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AuthService } from './../../../auth/auth.service';
 
 @Component({
   selector: 'app-place-detils',
@@ -15,12 +17,13 @@ export class PlaceDetilsPage implements OnInit {
   constructor(
         private activerouter: ActivatedRoute,
         private http: HttpClient,
-        private placesservice: PlacesService
+        private placesservice: PlacesService,
+        private afdb: AngularFireDatabase,
+        private AuthService: AuthService
      ) { }
   ngOnInit() {
     this.activerouter.queryParamMap.subscribe( abc => {
       console.log(abc.get('place_id'));
-
       this.placesservice.getPlaceDetails(abc.get('place_id')).subscribe( data =>{
         this.placesDetails.push(data['result']);
         console.log(this.placesDetails);
@@ -33,7 +36,7 @@ export class PlaceDetilsPage implements OnInit {
     speed: 400
   };
  addToFavorite(favoritePlaceId){
-  
+
   this.placesservice.setfavoritePlace(favoritePlaceId);
    
  }

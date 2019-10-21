@@ -1,3 +1,4 @@
+
 import { async } from '@angular/core/testing';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { Prediction} from './../locator/Ilocation'
 import { empty, Observable } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { AutoComplateService} from './auto-complate.service'
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -28,26 +30,29 @@ export class LocatorPage implements OnInit {
 	constructor(
 		private router: Router,
 		public placesservice: PlacesService,
-		private autocomplateService: AutoComplateService
+		private autocomplateService: AutoComplateService,
+		private LocadingCtrl: LoadingController
 		) { }
 
 	ngOnInit() { }
 
 	autocomplatePridiction(event:string, setTO:string){
-
-		 this.autocomplateService.autoComplate(event['target'].value)
-		if( setTO == 'work'){
-			this.werkPridiction = this.autocomplateService.autoComplate(event['target'].value)
-			.pipe( map ( x => x['predictions']));
-		} else {
-			this.homePridiction = this.autocomplateService.autoComplate(event['target'].value)
-			.pipe( map ( x => x['predictions']));
-		}
+	
+			this.autocomplateService.autoComplate(event['target'].value)
+			if( setTO == 'work'){
+				this.werkPridiction = this.autocomplateService.autoComplate(event['target'].value)
+				.pipe( map ( x => x['predictions']));
+			} else {
+				this.homePridiction = this.autocomplateService.autoComplate(event['target'].value)
+				.pipe( map ( x => x['predictions']));
+			} 
+		
+		
 	}
 
 	setLocation(pridiction:string,placeId:string, text:string,setName:string){
+		
 		if( setName == 'work'){
-			console.log(this.workLocationauto.length)
 			this.workLocationauto = pridiction;
 			this.autocomplateService.latlngbyPlaceId(placeId).pipe(
 				map (x => 
@@ -69,6 +74,7 @@ export class LocatorPage implements OnInit {
 		
 		this.werkPridiction = empty();
 		this.homePridiction = empty();
+		
 	}
 
 	navigateHome(){

@@ -14,7 +14,7 @@ export class FavoritePalcesPage implements OnInit {
   constructor(public favoriteService:FavoriteService) { }
 
   ngOnInit() {
-    this.Fplaces = this.favoriteService.favoritePlace.pipe(reduce((unique,item) => unique.includes(item)?unique: [...unique,item, []] ))
+    this.Fplaces = this.favoriteService.favoritePlace;
   }
 
 }

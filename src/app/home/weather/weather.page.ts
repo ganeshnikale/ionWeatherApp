@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { PlacesService } from './../places.service';
 import { Component, OnInit } from '@angular/core';
@@ -25,7 +26,11 @@ export class WeatherPage implements OnInit {
 
   currentView: string = 'home';
 
-  constructor(private weatherservice: WeatherService, private placesservice: PlacesService) { }
+  constructor(
+    private weatherservice: WeatherService,
+    private placesservice: PlacesService,
+    private LocadingCtrl: LoadingController
+    ) { }
 
   ngOnInit() {
 
@@ -35,11 +40,19 @@ export class WeatherPage implements OnInit {
     
   }
   getPlacesweatherData(lat, lng, storeData) {
-    this.weatherservice.getWeatherData(lat, lng).pipe(
-      map( x => x)
-    ).subscribe( abc => {
-      storeData.push(abc)
+    this.LocadingCtrl.create({
+      message:'Please Wait'
+    }).then( loadingEl =>{
+      loadingEl.present()
+      this.weatherservice.getWeatherData(lat, lng).pipe(
+        map( x => x)
+      ).subscribe( abc => {
+        loadingEl.dismiss();
+        storeData.push(abc)
+      })
     })
+
+    
   }
 
   segmentChanged($event) {

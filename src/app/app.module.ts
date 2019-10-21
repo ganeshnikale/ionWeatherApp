@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { AngularFireAuthModule} from 'angularfire2/auth'
 import { environment } from 'src/environments/environment';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,6 +28,7 @@ import { environment } from 'src/environments/environment';
     AngularFireAuthModule
   ],
   providers: [
+   
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

@@ -1,42 +1,48 @@
 <ion-header>
   <ion-toolbar color="light">
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Your FavoritePalces</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="background">
+  <ion-grid class="ion-no-margin ion-no-padding">
+    <ion-row>
+      <ion-col size-sm=6 offset-sm=3>
 
-  <ion-list *ngFor="let place of this.Fplaces | async">
-    <div class="item-content" detail>
-      <ion-item>
-      <ion-label >
-        <ion-text color="primary">
-          <h3>{{place.name}}</h3>
-        </ion-text>
-        <ion-text color="secondary" *ngIf="place.opening_hours">
-          <p>Open Now: <span *ngIf="place.opening_hours.open_now; else no"> Yes </span>
-            <ng-template #no>no</ng-template>
-          </p>
-        </ion-text>
-        <div *ngIf="place.rating">
-          <div class="star-ratings-css">
-            <div class="star-ratings-css-top" [style.width.%]="place.rating/5*100">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-            <div class="star-ratings-css-bottom">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <ion-list *ngFor="let place of this.Fplaces | async">
+          <div class="item-content" detail>
+            <ion-item>
+              <ion-label>
+                <ion-text color="primary">
+                  <h3>{{place.name}}</h3>
+                </ion-text>
+                <ion-text color="secondary" *ngIf="place.opening_hours">
+                  <p>Open Now: <span *ngIf="place.opening_hours.open_now; else no"> Yes </span>
+                    <ng-template #no>no</ng-template>
+                  </p>
+                </ion-text>
+                <div *ngIf="place.rating">
+                  <div class="star-ratings-css">
+                    <div class="star-ratings-css-top" [style.width.%]="place.rating/5*100">
+                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="star-ratings-css-bottom">
+                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                  </div>
+                </div>
+
+              </ion-label>
+              <ion-avatar slot="start" *ngIf="place.photos">
+                <img
+                  src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{place.photos[0].photo_reference}}&key=AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8">
+              </ion-avatar>
+            </ion-item>
           </div>
-        </div>
 
-      </ion-label>
-      <ion-avatar slot="start" *ngIf="place.photos">
-        <img
-          src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{place.photos[0].photo_reference}}&key=AIzaSyADtYqSYIWJ5ZBU160TZH6rkLkhK_vboh8">
-      </ion-avatar>
-    </ion-item>
-    </div>
-    
-</ion-list>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

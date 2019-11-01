@@ -1,7 +1,7 @@
 {
-  "appId": "com.ionic.angular.weather.places",
-  "appName": "ionWeather",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www"
+    "appId": "com.ionic.angular.weather.places",
+    "appName": "ionWeather",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "www"
 }

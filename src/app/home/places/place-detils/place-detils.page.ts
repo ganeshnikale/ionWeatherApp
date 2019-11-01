@@ -23,10 +23,8 @@ export class PlaceDetilsPage implements OnInit {
      ) { }
   ngOnInit() {
     this.activerouter.queryParamMap.subscribe( abc => {
-      console.log(abc.get('place_id'));
       this.placesservice.getPlaceDetails(abc.get('place_id')).subscribe( data =>{
-        this.placesDetails.push(data['result']);
-        console.log(this.placesDetails);
+        this.placesDetails = [data['result']];
       })
     })
   }
@@ -35,9 +33,8 @@ export class PlaceDetilsPage implements OnInit {
     initialSlide: 1,
     speed: 400
   };
- addToFavorite(favoritePlaceId){
-
-  this.placesservice.setfavoritePlace(favoritePlaceId);
+ addToFavorite(favoritePlace){ 
+  this.placesservice.setfavoritePlace(favoritePlace);
    
  }
 

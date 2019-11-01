@@ -1,0 +1,41 @@
+{
+    "project_info":
+    {
+        "project_number": "584035635619",
+        "firebase_url": "https://ionweather-9c1a5.firebaseio.com",
+        "project_id": "ionweather-9c1a5",
+        "storage_bucket": "ionweather-9c1a5.appspot.com"
+    },
+    "client": [
+    {
+        "client_info":
+        {
+            "mobilesdk_app_id": "1:584035635619:android:dba0cc53b9f609e09c0a16",
+            "android_client_info":
+            {
+                "package_name": "com.ionic.angular.weather.places"
+            }
+        },
+        "oauth_client": [
+        {
+            "client_id": "584035635619-2ia47d0c3jetdh3ghihuqofbvapp0g6l.apps.googleusercontent.com",
+            "client_type": 3
+        }],
+        "api_key": [
+        {
+            "current_key": "AIzaSyA3J9lqrLiy2kgOVAtw2OUM5PvxOAunpvE"
+        }],
+        "services":
+        {
+            "appinvite_service":
+            {
+                "other_platform_oauth_client": [
+                {
+                    "client_id": "584035635619-2ia47d0c3jetdh3ghihuqofbvapp0g6l.apps.googleusercontent.com",
+                    "client_type": 3
+                }]
+            }
+        }
+    }],
+    "configuration_version": "1"
+}

@@ -1,0 +1,15 @@
+{
+    "appId": "com.ionic.angular.weather.places",
+    "appName": "ionWeather",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "www",
+    "plugins":
+    {
+        "GoogleAuth":
+        {
+            "scopes": ["profile", "email"],
+            "serverClientId": "584035635619-2ia47d0c3jetdh3ghihuqofbvapp0g6l.apps.googleusercontent.com"
+        }
+    }
+}

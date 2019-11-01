@@ -19,7 +19,7 @@ export class PlacesService {
 
 	newFavoritePlace:boolean = false;
 
-	
+	abc:Observable<any[]>;
 
 	favoritePlace:Observable<any[]>;
 
@@ -34,12 +34,9 @@ export class PlacesService {
 		 ) { }
 
 	setfavoritePlace(favoritePlaceId){
-		this.afdb.list(`favoritePlace/${this.AuthService.userId}`).valueChanges().pipe(
-			map( val => val)
-		).subscribe( data => {
-			console.log(data)
-		})
+		this.afdb.list(`favoritePlace/${this.AuthService.userId}`).push(favoritePlaceId)
 	}
+
 	getLatLongs(location:string) {
 		let params = new HttpParams()
 		.set("address",location)

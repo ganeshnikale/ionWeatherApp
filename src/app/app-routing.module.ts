@@ -28,6 +28,7 @@ const routes: Routes = [
     loadChildren: './favorite-palces/favorite-palces.module#FavoritePalcesPageModule',
     canLoad: [AuthGuard]
    },
+  { path: 'auth2', loadChildren: './auth2/auth2.module#Auth2PageModule' },
 ];
 
 @NgModule({

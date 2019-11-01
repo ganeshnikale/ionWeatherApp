@@ -6,10 +6,12 @@ import { Router } from '@angular/router';
 import {Form, FormControl} from '@angular/forms';
 import { PlacesService } from './../home/places.service';
 import { Prediction} from './../locator/Ilocation'
+import { fromEvent } from 'rxjs';
 import { empty, Observable } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { AutoComplateService} from './auto-complate.service'
 import { LoadingController } from '@ionic/angular';
+
 
 
 @Component({
@@ -18,9 +20,11 @@ import { LoadingController } from '@ionic/angular';
 	styleUrls: ['./locator.page.scss'],
 })
 export class LocatorPage implements OnInit {
-
+	
 	workLocationauto:string = '';
 	homeLocationauto:string = '';
+
+
 
 	werkPridiction:Observable<any[]>;
 	homePridiction:Observable<any[]>;

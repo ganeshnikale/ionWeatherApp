@@ -37,14 +37,8 @@ export class PlacesService {
 		this.afdb.list(`favoritePlace/${this.AuthService.userId}`).valueChanges().pipe(
 			map( val => val)
 		).subscribe( data => {
-			console.log(data['reference'])
+			console.log(data)
 		})
-	
-		if(this.newFavoritePlace = true){
-			console.log('place Add');
-			this.afdb.list(`favoritePlace/${this.AuthService.userId}`).push(favoritePlaceId);
-		}
-		
 	}
 	getLatLongs(location:string) {
 		let params = new HttpParams()

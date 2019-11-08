@@ -6,7 +6,7 @@ import { AuthGuard} from './auth/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'auth2',
     pathMatch: 'full'
   },
   {
@@ -14,10 +14,7 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomePageModule',
     canLoad: [AuthGuard]
   },
-  { 
-    path: 'auth', 
-    loadChildren: './auth/auth.module#AuthPageModule',
-   },
+  
    {
     path: 'index',
     loadChildren: './locator/locator.module#LocatorPageModule',
